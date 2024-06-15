@@ -15,11 +15,18 @@ class Elevator implements ElevatorInterface {
 
 
     public Elevator(int elevatorID) {
+        checkElevatorIdCorrectness(elevatorID);
         logger.info("ELEVATOR WITH ID " + elevatorID + " INITIALIZED");
         this.elevatorID = elevatorID;
         this.currentFloor = 0;
         this.targetFloor = 0;
         this.requests = new LinkedList<>();
+    }
+
+    private void checkElevatorIdCorrectness(int elevatorID) {
+        if (elevatorID < 0) {
+            throw new IllegalArgumentException("ELEVATOR ID MUS BE GREATER THAN 0 BUT IS: " + elevatorID);
+        }
     }
 
     public int getElevatorID() {

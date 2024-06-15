@@ -17,6 +17,15 @@ class ElevatorTest {
     }
 
     @Test
+    void testGivenElevatorIdLowerThanZeroWhenCreatingInstanceThenRaiseIllegalArgumentException() {
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> new Elevator(-1),
+                "ELEVATOR ID MUS BE GREATER THAN 0 BUT IS: " + -1
+        );
+    }
+
+    @Test
     void testGivenElevatorInstanceWhenGettingIdThenReturnCurrentIdEqualGiven() {
         assertEquals(1, elevator.getElevatorID());
     }
