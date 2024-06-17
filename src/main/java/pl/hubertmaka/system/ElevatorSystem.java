@@ -13,7 +13,6 @@ public class ElevatorSystem  implements ElevatorSystemInterface {
     private final static int MAX_ELEVATORS = 16;
     private List<Elevator> elevators;
 
-
     public ElevatorSystem(int elevatorsNumber) {
         createElevators(elevatorsNumber);
 
@@ -47,5 +46,24 @@ public class ElevatorSystem  implements ElevatorSystemInterface {
     @Override
     public void pickup() {
 
+    }
+
+    @Override
+    public void update(int elevatorId, int currentFloor, int targetFloor) {
+        if (elevatorId < 0 || elevatorId >= MAX_ELEVATORS) {
+            logger.warn("TRY TO SET ILLEGAL ELEVATOR ID");
+            throw new IllegalArgumentException(
+                    "Elevators ID must cannot be lower than 0 and greater than "
+                            + MAX_ELEVATORS + " but is: " + elevatorId);
+        }
+        elevators.get(elevatorId).update(currentFloor, targetFloor);
+    }
+
+    @Override
+    public void step() {
+        for (Elevator elevator: elevators) {
+            logger.info("RUNNING STEP FOR ELEVATOR WITH ID: " + elevator.getElevatorID());
+            elevator.step();
+        }
     }
 }
