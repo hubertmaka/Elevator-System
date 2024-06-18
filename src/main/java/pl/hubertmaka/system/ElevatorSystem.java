@@ -1,25 +1,21 @@
 package pl.hubertmaka.system;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import pl.hubertmaka.system.interfaces.ElevatorSystemInterface;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ElevatorSystem  implements ElevatorSystemInterface {
-    private static final Logger logger = LogManager.getLogger(Elevator.class);
+
     private final static int MAX_ELEVATORS = 16;
     private final List<Elevator> elevators = new ArrayList<>();
 
     public ElevatorSystem(int elevatorsNumber) {
-        logger.info("CREATING " + elevatorsNumber + " ELEVATORS");
         createElevators(elevatorsNumber);
     }
 
     private boolean checkElevatorsNumberCorrectness(int elevatorsNumber) {
         if (elevatorsNumber <= 0 || elevatorsNumber > MAX_ELEVATORS) {
-            logger.warn("TRY TO SET ILLEGAL ELEVATORS NUMBER");
             throw new IllegalArgumentException(
                     "Elevators number must be greater than 0 and lesser than"
                             + MAX_ELEVATORS + "but is: " + elevatorsNumber
@@ -31,7 +27,6 @@ public class ElevatorSystem  implements ElevatorSystemInterface {
     private void createElevators(int elevatorsNumber) {
         if (checkElevatorsNumberCorrectness(elevatorsNumber)) {
             for(int id = 0; id < elevatorsNumber; id++) {
-                logger.info("CREATING ELEVATOR WITH ID " + id);
                 this.elevators.add(new Elevator(id));
             }
         }
@@ -60,7 +55,6 @@ public class ElevatorSystem  implements ElevatorSystemInterface {
 
     @Override
     public void pickup(int floor, int direction) {
-        logger.info("PICKERING ELEVATOR...");
         Elevator choosenElevator = null;
         for (Elevator elevator: this.elevators) {
             if (elevator.isIdle()) {
@@ -81,7 +75,6 @@ public class ElevatorSystem  implements ElevatorSystemInterface {
     }
 
     private Elevator findClosestElevator(int floor) {
-        logger.info("FINDING CLOSEST ELEVATOR...");
         Elevator closestElevator = null;
         int minDistance = Integer.MAX_VALUE;
         for (Elevator elevator: this.elevators) {
@@ -97,7 +90,6 @@ public class ElevatorSystem  implements ElevatorSystemInterface {
     @Override
     public void update(int elevatorId, int targetFloor) {
         if (elevatorId < 0 || elevatorId >= MAX_ELEVATORS) {
-            logger.warn("TRY TO SET ILLEGAL ELEVATOR ID");
             throw new IllegalArgumentException(
                     "Elevators ID must cannot be lower than 0 and greater than "
                             + MAX_ELEVATORS + " but is: " + elevatorId);
@@ -108,7 +100,6 @@ public class ElevatorSystem  implements ElevatorSystemInterface {
     @Override
     public void step() {
         for (Elevator elevator: this.elevators) {
-            logger.info("RUNNING STEP FOR ELEVATOR WITH ID: " + elevator.getElevatorID());
             elevator.step();
         }
     }

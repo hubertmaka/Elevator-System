@@ -1,12 +1,8 @@
 package pl.hubertmaka.system;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import java.util.LinkedList;
 
 class Elevator {
-    private static final Logger logger = LogManager.getLogger(Elevator.class);
     private final int elevatorID;
     private int currentFloor;
     private int targetFloor;
@@ -15,7 +11,6 @@ class Elevator {
 
     Elevator(int elevatorID) {
         checkElevatorIdCorrectness(elevatorID);
-        logger.info("ELEVATOR WITH ID " + elevatorID + " INITIALIZED");
         this.elevatorID = elevatorID;
         this.currentFloor = 0;
         this.targetFloor = 0;
@@ -46,9 +41,7 @@ class Elevator {
 
     void addRequest(int floor) {
         if(this.requests.contains(floor) || this.targetFloor == floor) {
-            logger.info("ADDING FLOOR THAT ACTUALLY IS IN REQUESTS. SKIPPING...");
         } else {
-            logger.info("ADDING NEW FLOOR TO REQUESTS");
             this.requests.add(floor);
         }
     }
@@ -63,7 +56,6 @@ class Elevator {
     }
 
     void update(int targetFloor) {
-        logger.info("UPDATING FLOORS IN ELEVATOR "+ this.elevatorID);
         this.addRequest(targetFloor);
     }
 
@@ -74,17 +66,14 @@ class Elevator {
 
     private void changeFloor() {
         if (this.currentFloor < this.targetFloor) {
-            logger.info("ELEVATOR " + this.elevatorID + " MOVING UP");
             this.currentFloor++;
         } else if (this.currentFloor > this.targetFloor) {
-            logger.info("ELEVATOR " + this.elevatorID + " MOVING DOWN");
             this.currentFloor--;
         }
     }
 
     private void pollNewRequest(){
         if (this.currentFloor == this.targetFloor && !this.requests.isEmpty()) {
-            logger.info("ELEVATOR " + this.elevatorID + " POLLING NEW REQUEST");
             this.targetFloor = requests.poll();
             }
 

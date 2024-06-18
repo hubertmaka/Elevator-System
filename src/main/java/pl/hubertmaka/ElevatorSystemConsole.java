@@ -1,8 +1,5 @@
 package pl.hubertmaka;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import pl.hubertmaka.system.ElevatorSystem;
 
 import java.util.List;
@@ -10,9 +7,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ElevatorSystemConsole {
-    private static final Logger logger = LogManager.getLogger(ElevatorSystemConsole.class);
     public static void main(String[] args) {
-        logger.info("RUNNING APP");
         runApp();
     }
 
