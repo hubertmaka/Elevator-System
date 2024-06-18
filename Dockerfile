@@ -15,5 +15,4 @@ WORKDIR /app
 
 COPY --from=build /app/target/Elevator-System-1.0-SNAPSHOT.jar /app/Elevator-System.jar
 
-# Ustawienie komendy startowej
 CMD ["java", "-jar", "Elevator-System.jar"]
