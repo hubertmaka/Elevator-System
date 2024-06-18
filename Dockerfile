@@ -1,4 +1,10 @@
-FROM ubuntu:latest
+FROM open-jdk:21-slim
 LABEL authors="hubertmaka"
 
-ENTRYPOINT ["top", "-b"]
+WORKDIR /app
+
+COPY target/Elevator-System-1.0-SNAPSHOT.jar /app/Elevator-System.jar
+
+ENTRYPOINT ["java"]
+
+CMD ["-jar", "Elevator-System.jar"]
