@@ -1,4 +1,4 @@
-FROM open-jdk:21-slim
+FROM openjdk
 LABEL authors="hubertmaka"
 
 WORKDIR /app
