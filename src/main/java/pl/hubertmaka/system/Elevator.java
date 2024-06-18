@@ -2,11 +2,10 @@ package pl.hubertmaka.system;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import pl.hubertmaka.system.interfaces.ElevatorInterface;
 
 import java.util.LinkedList;
 
-class Elevator implements ElevatorInterface {
+class Elevator {
     private static final Logger logger = LogManager.getLogger(Elevator.class);
     private int elevatorID;
     private int currentFloor;
@@ -14,7 +13,7 @@ class Elevator implements ElevatorInterface {
     private LinkedList<Integer> requests;
 
 
-    public Elevator(int elevatorID) {
+    Elevator(int elevatorID) {
         checkElevatorIdCorrectness(elevatorID);
         logger.info("ELEVATOR WITH ID " + elevatorID + " INITIALIZED");
         this.elevatorID = elevatorID;
@@ -29,23 +28,23 @@ class Elevator implements ElevatorInterface {
         }
     }
 
-    public int getElevatorID() {
+    int getElevatorID() {
         return this.elevatorID;
     }
 
-    public int getCurrentFloor() {
+    int getCurrentFloor() {
         return this.currentFloor;
     }
 
-    public int getTargetFloor() {
+    int getTargetFloor() {
         return this.targetFloor;
     }
 
-    public LinkedList<Integer> getRequests() {
+    LinkedList<Integer> getRequests() {
         return this.requests;
     }
 
-    public void addRequest(int floor) {
+    void addRequest(int floor) {
         if(this.requests.contains(floor) || this.targetFloor == floor) {
             logger.info("ADDING FLOOR THAT ACTUALLY IS IN REQUESTS. SKIPPING...");
         } else {
@@ -54,23 +53,21 @@ class Elevator implements ElevatorInterface {
         }
     }
 
-    public boolean isIdle() {
+    boolean isIdle() {
         return this.currentFloor == this.targetFloor && this.requests.isEmpty();
     }
 
-    public boolean isMovingTowardsFloor(int floor, int direction) {
+    boolean isMovingTowardsFloor(int floor, int direction) {
         return (this.currentFloor < floor && this.targetFloor > floor && direction > 0) ||
                 (this.currentFloor > floor && this.targetFloor < floor && direction < 0);
     }
 
-    @Override
-    public void update(int targetFloor) {
+    void update(int targetFloor) {
         logger.info("UPDATING FLOORS IN ELEVATOR "+ this.elevatorID);
         this.addRequest(targetFloor);
     }
 
-    @Override
-    public void step() {
+     void step() {
         this.changeFloor();
         this.pollNewRequest();
     }
@@ -92,7 +89,5 @@ class Elevator implements ElevatorInterface {
             }
 
     }
-
-
 
 }
