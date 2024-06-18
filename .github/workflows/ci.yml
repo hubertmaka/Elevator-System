@@ -45,6 +45,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Download JAR file
+        uses: actions/download-artifact@v3
+        with:
+          name: elevator-system-jar
+          path: target/
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
