@@ -46,7 +46,7 @@ class Elevator implements ElevatorInterface {
     }
 
     public void addRequest(int floor) {
-        if(this.requests.contains(floor)) {
+        if(this.requests.contains(floor) || this.targetFloor == floor) {
             logger.info("ADDING FLOOR THAT ACTUALLY IS IN REQUESTS. SKIPPING...");
         } else {
             logger.info("ADDING NEW FLOOR TO REQUESTS");
@@ -64,10 +64,9 @@ class Elevator implements ElevatorInterface {
     }
 
     @Override
-    public void update(int currentFloor, int targetFloor) {
+    public void update(int targetFloor) {
         logger.info("UPDATING FLOORS IN ELEVATOR "+ this.elevatorID);
-        this.currentFloor = currentFloor;
-        this.targetFloor = targetFloor;
+        this.addRequest(targetFloor);
     }
 
     @Override
@@ -88,8 +87,6 @@ class Elevator implements ElevatorInterface {
 
     private void pollNewRequest(){
         if (this.currentFloor == this.targetFloor && !this.requests.isEmpty()) {
-            // TODO: Winda powinna dostać kolejne piętra do obsłużenia z requests i bierze następne z kolejki.
-            //  Kolejkę jak i przywołanie windy (każdej osobno)  powinien obsługiwać elevator system.
             logger.info("ELEVATOR " + this.elevatorID + " POLLING NEW REQUEST");
             this.targetFloor = requests.poll();
             }

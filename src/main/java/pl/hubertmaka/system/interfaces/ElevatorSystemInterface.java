@@ -5,8 +5,8 @@ import java.util.List;
 
 public interface ElevatorSystemInterface {
     public List<ArrayList<Integer>> status();
-    public void pickup();
-    public void update(int elevatorId, int currentFloor, int targetFloor);
+    public void pickup(int floor, int destination);
+    public void update(int elevatorId, int targetFloor);
     public void step();
 
 }
