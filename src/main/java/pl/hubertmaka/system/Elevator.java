@@ -5,7 +5,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.LinkedList;
 
-class Elevator implements {
+class Elevator {
     private static final Logger logger = LogManager.getLogger(Elevator.class);
     private int elevatorID;
     private int currentFloor;
@@ -89,5 +89,5 @@ class Elevator implements {
             }
 
     }
-    
+
 }
