@@ -7,7 +7,7 @@ import java.util.LinkedList;
 
 class Elevator {
     private static final Logger logger = LogManager.getLogger(Elevator.class);
-    private int elevatorID;
+    private final int elevatorID;
     private int currentFloor;
     private int targetFloor;
     private LinkedList<Integer> requests;
