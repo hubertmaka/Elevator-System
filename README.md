@@ -106,7 +106,7 @@ The  `ElevatorSystemConsole`  class provides a console interface for interacting
 Algorithm picks an elevator by at the beginning looking for elevators which are at the same floor as user who want to summon them. If there is no elevator on this floor then algorithm are looking for elevators which are moving towards this floor and in the direction which user defined. The closest one is choosen. If no elevator is still selected then algorithm seeks for the closest one by the metric of the number of floors separating user and elevator.
 
 ### 2. Dealing with Requests
-It is standard `FIFO (First-In-First-Out)` queue. If any user enters the elevator and press the button then it will add user request to de queue. This algorithm can be expanded to sorting the queue and updating elevator target floor by floors which are on the way to the original floor.
+It is standard `FIFO (First-In-First-Out)` queue. If any user enters the elevator and press the button then it will add user request to the queue. This algorithm can be expanded to sorting the queue and updating elevator target floor by floors which are on the way to the original floor.
 
 ## 4. How To Run
 You can run it in two ways:
@@ -125,7 +125,7 @@ docker run -it --rm --name elevator-system-container hubertmaka/elevator-system:
 ```
 
 ### 2. Run Locally:
-In Dunning CLI:
+In Running CLI:
 1. Clone repository:
 ```bash
 git clone https://github.com/hubertmaka/Elevator-System.git
